@@ -11,16 +11,15 @@ def check_game_over():
         'width': 34,
         'height': 30
     }
-    sct = mss()
-    img = np.array(sct.grab(_game_over_box))[:, :, :3]
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    curr_state = gray.sum()
-    if GAME_OVER_RANGER[0] < curr_state < GAME_OVER_RANGER[1]:
+    _img = np.array(mss().grab(_game_over_box))[:, :, :3]
+    _gray = cv2.cvtColor(_img, cv2.COLOR_BGR2GRAY)
+    _curr_state = _gray.sum()
+    if GAME_OVER_RANGER[0] < _curr_state < GAME_OVER_RANGER[1]:
         _result = True
     return _result
 
 
-def get_sum_gray_box_font_dingo():
+def check_sum_gray_box_font_dingo():
     _dingo_font_face_box = {
         'left': 420 + 80,
         'top': 430,

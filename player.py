@@ -1,10 +1,11 @@
-import time
-
 import pyautogui as pya
 from pyscreeze import Box
 
 import detecter
-from process_status_game import get_sum_gray_box_font_dingo, check_game_over
+
+BLANK_BOX = 197600
+TIME_BETWEEN_FRAMES = 0.01
+TIME_BETWEEN_GAMES = 0.5
 
 
 class Object:
@@ -14,8 +15,6 @@ class Object:
 
 
 def jump():
-    pya.press('up')
-    time.sleep(TIME_BETWEEN_FRAMES)
     pya.press('up')
 
 
@@ -59,26 +58,3 @@ def scanning(dingo_box=None):
             return 'medium'
 
     return ''
-
-
-BLANK_BOX = 197600
-TIME_BETWEEN_FRAMES = 0.01
-TIME_BETWEEN_GAMES = 0.5
-
-if __name__ == '__main__':
-    # print(get_sum_array_img({
-    #     'left': 702,
-    #     'top': 412,
-    #     'width': 34,
-    #     'height': 30
-    # }))
-    jump()
-    while True:
-        if check_game_over():
-            print('Choi ngu')
-            break
-        if get_sum_gray_box_font_dingo() != BLANK_BOX:
-            jump()
-            time.sleep(0.1)
-            down()
-        time.sleep(TIME_BETWEEN_FRAMES)
