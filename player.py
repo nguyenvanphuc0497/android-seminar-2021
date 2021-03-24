@@ -3,10 +3,6 @@ from pyscreeze import Box
 
 import detecter
 
-BLANK_BOX = 197600
-TIME_BETWEEN_FRAMES = 0.01
-TIME_BETWEEN_GAMES = 0.5
-
 
 class Object:
     TREE = 'tree'

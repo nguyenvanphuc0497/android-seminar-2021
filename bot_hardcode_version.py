@@ -1,10 +1,11 @@
 import time
 
+import game_object
 import player as action
 import process_status_game as checker
 
 if __name__ == '__main__':
-    time.sleep(action.TIME_BETWEEN_GAMES)
+    time.sleep(game_object.TIME_BETWEEN_GAMES)
     action.jump()
 
     print('speed\tdistance\tsize')
@@ -20,9 +21,9 @@ if __name__ == '__main__':
         if checker.check_game_over():
             print('\nChoi ngu')
             break
-        if checker.check_sum_gray_box_font_dingo() != action.BLANK_BOX:
+        if checker.check_sum_gray_box_font_dingo() != game_object.BLANK_BOX:
             action.jump()
             time.sleep(0.1)
             action.down()
-        time.sleep(action.TIME_BETWEEN_FRAMES)
+        time.sleep(game_object.TIME_BETWEEN_FRAMES)
         print(f'{_speed}\t{_distance}\t{_size}', end='\r', flush=True)
