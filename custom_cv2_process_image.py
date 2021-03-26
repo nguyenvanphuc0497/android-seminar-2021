@@ -3,6 +3,9 @@ import numpy as np
 from PIL import Image
 from mss import mss
 
+import game_object
+from game_object import LAND_SCAPE_BOX
+
 BOX_MY_SCREEN = {'left': 270, 'top': 420,
                  'width': 50, 'height': 20}
 
@@ -51,3 +54,43 @@ def save_monitor_by_box():
     _img_final.save(_path)
     print(_path)
     return _path
+
+
+def compute_region_of_interest(landscape=LAND_SCAPE_BOX):
+    # tu thong tin ve landscape, ta lay ra duoc 1 vung chua day du cac vat the can
+    # xem xet, nhung lai nho hon landscape (do do giam duoc khoi luong tinh toan)
+    ground_height = 12
+    y1 = landscape['height'] - 44
+    y2 = landscape['height'] - ground_height
+    x1 = 44 + 24
+    x2 = landscape['width'] - 1
+    return x1, x2, y1, y2
+
+
+def test_land_space_box_after_roi():
+    x1, x2, y1, y2 = compute_region_of_interest(LAND_SCAPE_BOX)
+    print(x1, x2, y1, y2)
+    image = np.array(mss().grab(LAND_SCAPE_BOX))[:, :, :3]
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray_image += np.abs(247 - gray_image[0, x2])  # Đưa ảnh về đen trắng gần nhất có thể
+    roi = gray_image[y1:y2, x1:x2]
+    # Image.fromarray(image).show('image_source')
+    # Image.fromarray(gray_image).show('image_gray')
+    # Image.fromarray(roi).show()
+
+    _w, _h = roi.shape[::-1]
+    _region_appear = roi[0:_h, _w - 50:_w]
+    _region_appear_again = roi[0:_h, 0:50]
+    _right = False
+    _left = False
+    print(_region_appear.sum(), _region_appear_again.sum())
+    if _region_appear.sum() > game_object.OBJECT_APPEAR_REGION_BLANK:
+        _right = True
+    if _region_appear_again.sum() > game_object.OBJECT_APPEAR_REGION_BLANK:
+        _left = True
+    Image.fromarray(_region_appear).show()
+    # Image.fromarray(_region_appear_again).show()
+
+    print(_left, _right)
+
+# test_land_space_box_after_roi()
