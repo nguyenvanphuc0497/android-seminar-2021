@@ -60,11 +60,9 @@ def compute_speed(distance_array, last_distance, last_speed, loop_time,
     return max(min(speed, last_speed + max_speed_step), last_speed - max_speed_step)
 
 
-def compute_speed2(distance, last_distance, loop_time, last_speed, thread_hold):
+def compute_speed2(distance, last_distance, loop_time, last_speed, max_speed_step=game_object.MAX_SPEED_STEP_ESTIMATE):
     _speed = (last_distance - distance) / loop_time
-    if abs(last_speed - _speed) > thread_hold:
-        return last_speed
-    return max(((_speed + last_speed) / 2), last_speed)
+    return max(min(_speed, last_speed + max_speed_step), last_speed - max_speed_step)
 
 
 def is_has_object_appear_and_reappear(roi):

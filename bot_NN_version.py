@@ -13,12 +13,11 @@ if __name__ == '__main__':
     action.jump()
 
     print('speed\tdistance\tsize')
-    _speed = 0
+    _speed = game_object.INIT_SPEED
     _distance = 0
     _size = 0
     _start_time = None
     _count_cactus = 0
-    _thread_hold_speed = game_object.MAX_SPEED_STEP_ESTIMATE
 
     x1, x2, y1, y2 = checker.compute_region_of_interest()
     last_distance = game_object.LAND_SCAPE_BOX['width']
@@ -39,19 +38,22 @@ if __name__ == '__main__':
             - distance < x2: Để loại trừ việc không có cây nào xuất hiện
             """
             if _start_time:
-                if _thread_hold_speed > 30:
-                    _thread_hold_speed -= 10
                 _loop_time = _end_time - _start_time
-                _speed = checker.compute_speed2(_distance, last_distance, _loop_time, _speed, _thread_hold_speed)
+                _speed = checker.compute_speed2(_distance, last_distance, _loop_time, _speed)
+            print(f'{_speed}\t{_distance}\t{_size}\t{_count_cactus}', end='\n', flush=True)
+
         _start_time = time.time()
 
         last_distance = _distance
 
-        print(f'{_speed}\t{_distance}\t{_size}\t{_count_cactus}', end='\n', flush=True)
+        # print(f'{_speed}\t{_distance}\t{_size}\t{_count_cactus}', end='\r', flush=True)
 
         if checker.check_game_over():
             print('\nChoi ngu')
-            break
+            time.sleep(3)
+
+            action.jump()
+
         if checker.check_sum_gray_box_font_dingo() != game_object.BLANK_BOX:
             action.jump()
             time.sleep(0.1)
