@@ -5,6 +5,7 @@ import numpy
 from mss import mss
 
 import game_object
+import nn_process
 import player as action
 import process_status_game as checker
 
@@ -31,6 +32,11 @@ if __name__ == '__main__':
         _distance, _size = checker.compute_distance_and_size(roi, x2)
         _checker_region_left, _checker_region_right = checker.is_has_object_appear_and_reappear(roi)
 
+        _input_set = [_distance, _speed, _size]
+
+        nn_process.wrap_model(_input_set, game_object.clever_params, 3)
+        # nn_process.wrap_model(_input_set, None, 3)
+
         _end_time = time.time()
         if _distance < last_distance and _distance < x2:
             """
@@ -40,7 +46,7 @@ if __name__ == '__main__':
             if _start_time:
                 _loop_time = _end_time - _start_time
                 _speed = checker.compute_speed2(_distance, last_distance, _loop_time, _speed)
-            print(f'{_speed}\t{_distance}\t{_size}\t{_count_cactus}', end='\n', flush=True)
+            # print(f'{_speed}\t{_distance}\t{_size}\t{_count_cactus}', end='\n', flush=True)
 
         _start_time = time.time()
 
@@ -54,9 +60,9 @@ if __name__ == '__main__':
 
             action.jump()
 
-        if checker.check_sum_gray_box_font_dingo() != game_object.BLANK_BOX:
-            action.jump()
-            time.sleep(0.1)
-            action.down()
-            _count_cactus += 1
+        # if checker.check_sum_gray_box_font_dingo() != game_object.BLANK_BOX:
+        #     action.jump()
+        #     time.sleep(0.1)
+        #     action.down()
+        #     _count_cactus += 1
         time.sleep(game_object.TIME_BETWEEN_FRAMES)
