@@ -73,10 +73,10 @@ import player
 
 
 def from_model_to_action(value, threshold=0.60):
-    print(value)
+    # print(value)
     if value > threshold:
         player.jump()
-        print('Nhảy nhảy nhảy')
+        # print('Nhảy nhảy nhảy')
 
 
 def wrap_model(X, parameters, n_x):
