@@ -14,7 +14,7 @@ N_H = 3
 N_Y = 1
 
 POP_SIZE = 12
-MUTATION_PROB = 0.1
+MUTATION_PROB = 0.1  # Ngưỡng đột biến. Nếu rate lớn hơn ngưỡng này thì sẽ đột biến
 N_SIZE = 4
 RANDOM_SET = [6, 5, 4, 3]
 BODY_KEYS = ["W1", "W2", "b1", "b2"]
@@ -70,7 +70,7 @@ def random_match(random_set=RANDOM_SET):
 
 
 def do_mutation(child, mutation_prob=MUTATION_PROB):
-    mutation_rate = np.random.random(16)
+    mutation_rate = np.random.random(16)  # Random ngưỡng để quyết định có đột biến hay
     new_child = child[:]
     for ind in range(16):
         if mutation_rate[ind] < mutation_prob:
@@ -94,11 +94,12 @@ def crossver(adam, eva):
     cut_1 = np.random.randint(0, 12)
     cut_2 = np.random.randint(12, 16) - 12
 
-    childs = []
-    childs.append(weight_adam[:cut_1] + weight_eva[cut_1:] + bias_adam[:cut_2] + bias_eva[cut_2:])
-    childs.append(weight_adam[:cut_1] + weight_eva[cut_1:] + bias_eva[:cut_2] + bias_adam[cut_2:])
-    childs.append(weight_eva[:cut_1] + weight_adam[cut_1:] + bias_adam[:cut_2] + bias_eva[cut_2:])
-    childs.append(weight_eva[:cut_1] + weight_adam[cut_1:] + bias_eva[:cut_2] + bias_adam[cut_2:])
+    childs = [
+        weight_adam[:cut_1] + weight_eva[cut_1:] + bias_adam[:cut_2] + bias_eva[cut_2:],
+        weight_adam[:cut_1] + weight_eva[cut_1:] + bias_eva[:cut_2] + bias_adam[cut_2:],
+        weight_eva[:cut_1] + weight_adam[cut_1:] + bias_adam[:cut_2] + bias_eva[cut_2:],
+        weight_eva[:cut_1] + weight_adam[cut_1:] + bias_eva[:cut_2] + bias_adam[cut_2:],
+    ]
     selected_child = np.random.randint(0, 4)
     return childs[selected_child]
 
