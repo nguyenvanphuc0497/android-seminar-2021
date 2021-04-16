@@ -160,7 +160,7 @@ def evolve():
 
         score = []
         for trex in curr_gen:
-            count_cactus = bot_NN_version.play_game(trex)
+            count_cactus = bot_NN_version.play_game_to_train(trex)
             score.append(count_cactus)
 
         log1.info(score)
