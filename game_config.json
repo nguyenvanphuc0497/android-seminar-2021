@@ -1,0 +1,20 @@
+{
+  "GAME_OVER_BOX": {
+    "left": 703,
+    "top": 460,
+    "width": 34,
+    "height": 30
+  },
+  "DINGO_BOX": {
+    "left": 440,
+    "top": 479,
+    "width": 44,
+    "height": 44
+  },
+  "GAME_SCAPE_BOX": {
+    "left": 421,
+    "top": 394,
+    "width": 599,
+    "height": 129
+  }
+}

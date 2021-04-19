@@ -17,7 +17,7 @@ def check_sum_gray_box_font_dingo():
     return get_sum_array_img(_dingo_font_face_box)
 
 
-def compute_region_of_interest(landscape=LAND_SCAPE_BOX):
+def compute_region_of_interest(landscape=GAME_SCAPE_BOX):
     # tu thong tin ve landscape, ta lay ra duoc 1 vung chua day du cac vat the can
     # xem xet, nhung lai nho hon landscape (do do giam duoc khoi luong tinh toan)
     ground_height = 12

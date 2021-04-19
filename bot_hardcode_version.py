@@ -8,22 +8,19 @@ if __name__ == '__main__':
     time.sleep(game_object.TIME_BETWEEN_GAMES)
     action.jump()
 
-    print('speed\tdistance\tsize')
-    _speed = 0
-    _distance = 0
-    _size = 0
-
+    print('Gray Sum, Count Jump')
+    _count = 0
     while True:
-        _speed += 1
-        _distance += 1
-        _size += 1
-
         if checker.check_game_over():
-            print('\nChoi ngu')
+            print('\nRip man')
             break
-        if checker.check_sum_gray_box_font_dingo() != game_object.BLANK_BOX:
+
+        gray_sum_front = checker.check_sum_gray_box_font_dingo()
+        print(f'{gray_sum_front}, {_count}', end='\r', flush=True)
+
+        if gray_sum_front != game_object.BLANK_BOX:
             action.jump()
             time.sleep(0.1)
             action.down()
+            _count += 1
         time.sleep(game_object.TIME_BETWEEN_FRAMES)
-        print(f'{_speed}\t{_distance}\t{_size}', end='\r', flush=True)

@@ -1,7 +1,7 @@
 import pyautogui
 from PIL import ImageGrab
 
-IMAGE_COMPARE = 'screen_scanning.png'
+IMAGE_COMPARE = 'land_space.png'
 
 
 def is_game_over():

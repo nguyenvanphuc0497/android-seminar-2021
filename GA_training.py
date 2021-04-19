@@ -212,5 +212,4 @@ logging.basicConfig(filename=log_file_name_2, level=logging.INFO,
 log1.info("Start")
 log2.info("Start")
 
-time.sleep(3)
 evolve()

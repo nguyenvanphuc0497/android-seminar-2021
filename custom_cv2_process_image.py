@@ -4,7 +4,7 @@ from PIL import Image
 from mss import mss
 
 import game_object
-from game_object import LAND_SCAPE_BOX
+from game_object import GAME_SCAPE_BOX
 
 BOX_MY_SCREEN = {'left': 270, 'top': 420,
                  'width': 50, 'height': 20}
@@ -56,7 +56,7 @@ def save_monitor_by_box():
     return _path
 
 
-def compute_region_of_interest(landscape=LAND_SCAPE_BOX):
+def compute_region_of_interest(landscape=GAME_SCAPE_BOX):
     # tu thong tin ve landscape, ta lay ra duoc 1 vung chua day du cac vat the can
     # xem xet, nhung lai nho hon landscape (do do giam duoc khoi luong tinh toan)
     ground_height = 12
@@ -68,9 +68,9 @@ def compute_region_of_interest(landscape=LAND_SCAPE_BOX):
 
 
 def test_land_space_box_after_roi():
-    x1, x2, y1, y2 = compute_region_of_interest(LAND_SCAPE_BOX)
+    x1, x2, y1, y2 = compute_region_of_interest(GAME_SCAPE_BOX)
     print(x1, x2, y1, y2)
-    image = np.array(mss().grab(LAND_SCAPE_BOX))[:, :, :3]
+    image = np.array(mss().grab(GAME_SCAPE_BOX))[:, :, :3]
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     gray_image += np.abs(247 - gray_image[0, x2])  # Đưa ảnh về đen trắng gần nhất có thể
     roi = gray_image[y1:y2, x1:x2]

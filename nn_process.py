@@ -82,4 +82,4 @@ def wrap_model(X, parameters, n_x):
         parameters = initialize_parameters(3, 3, 1)
     X_adj = re_shape_X(X, n_x)
     action_value = tRex_model(X_adj, parameters).item()
-    from_model_to_action(action_value, threshold=0.60)
+    from_model_to_action(action_value, threshold=0.59)
